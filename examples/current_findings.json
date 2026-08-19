@@ -1,0 +1,13 @@
+[
+  {
+    "scope_key": "scanner=basalt-azure|provider=azure|account=8b33|regions=eastus",
+    "fingerprint": "f2a59f5c3b3ce4a2b7a8218d1c83254c",
+    "rule_id": "storage.public-blob-access",
+    "title": "Public blob access is enabled",
+    "severity": "critical",
+    "risk_score": 96,
+    "resource_urn": "urn:basalt:azure:8b33:eastus:Microsoft.Storage/storageAccounts:customerexportprod",
+    "control_ids": ["cis-azure:storage.public-blob-access"],
+    "remediation_summary": "Set allowBlobPublicAccess to false and review existing container ACLs."
+  }
+]

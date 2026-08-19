@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "basalt-rag"
+version = "0.1.0"
+description = "Citation-first retrieval over Basalt findings and control catalogs for grounded risk and remediation explanations."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Kingsley Okafor" }]
+keywords = ["rag", "retrieval", "security", "cloud-security", "compliance", "citations", "basalt"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security",
+  "Typing :: Typed",
+]
+dependencies = [
+  "basalt-core>=0.1.1,<1",
+  "pydantic>=2.6,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2",
+  "mypy>=1.10",
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.5",
+  "twine>=5.1",
+]
+
+[project.scripts]
+basalt-rag = "basalt_rag.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/kingsokafor777-droid/basalt-rag"
+Source = "https://github.com/kingsokafor777-droid/basalt-rag"
+Issues = "https://github.com/kingsokafor777-droid/basalt-rag/issues"
+Changelog = "https://github.com/kingsokafor777-droid/basalt-rag/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/basalt_rag"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/docs", "/examples", "/README.md", "/LICENSE", "/CHANGELOG.md"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "C4", "SIM", "RUF", "ARG", "PTH"]
+ignore = ["N818", "RUF012", "A003", "RUF022", "UP042", "UP017"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG", "PTH", "S101"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unreachable = true
+plugins = ["pydantic.mypy"]
+files = ["src/basalt_rag"]
+
+[[tool.mypy.overrides]]
+module = ["basalt_core.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+[tool.coverage.run]
+source = ["basalt_rag"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:", "raise NotImplementedError"]
+fail_under = 85
