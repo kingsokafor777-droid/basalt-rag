@@ -9,4 +9,4 @@
 - [x] Add retrieval-quality, citation-integrity, deterministic-output, and CLI tests.
 - [x] Add package metadata, strict lint/type/test quality gates, CI, distribution validation, and documentation.
 - [x] Verify every cited control ID resolves against Basalt Core and every answer citation maps to indexed source evidence.
-- [ ] Commit and push basalt-rag to GitHub.
+- [x] Commit and push basalt-rag to GitHub.
