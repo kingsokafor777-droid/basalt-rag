@@ -5,6 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /app
 RUN apt-get update \
+    && apt-get upgrade --no-install-recommends --yes \
     && apt-get install --no-install-recommends --yes git \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 10001 basalt \
