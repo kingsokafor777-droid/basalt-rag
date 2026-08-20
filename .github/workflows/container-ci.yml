@@ -36,11 +36,11 @@ jobs:
           severity-cutoff: high
           output-format: json
           output-file: grype.json
-      - name: Enforce high-severity vulnerability gate
-        run: test "$(jq '[.matches[]? | select(.vulnerability.severity | ascii_upcase | IN("HIGH", "CRITICAL"))] | length' grype.json)" -eq 0
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: basalt-rag-sbom
           path: |
             sbom.spdx.json
             grype.json
+      - name: Enforce high-severity vulnerability gate
+        run: test "$(jq '[.matches[]? | select(.vulnerability.severity | ascii_upcase | IN("HIGH", "CRITICAL"))] | length' grype.json)" -eq 0
